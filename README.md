@@ -22,25 +22,28 @@ Fetch stats with elasticsearch, and convert stats to metrics.
 
 | setting    | type        | default                           | description                       |
 |------------|-------------|-----------------------------------|-----------------------------------|
-| urls       |             | ["http://localhost:9200"]         | list of servers to poll           |
+| tag        |             | elasticsearch_stats               | tag to emit events on             |
+| urls       |             | ["http://localhost:9200"]         | list of urls to poll              |
 | timeout    | second      | 10                                | timeout for each call             |
 | username   |             |                                   | username for basic authentication |
 | password   |             |                                   | password for basic authentication |
-| interval   | second      | 300                               | interval for stat probe execution |
+| interval   | second      | 300                               | interval for probe execution      |
 | user_agent |             | fluent-plugin-elasticsearch-stats | user agent for http request       |
 | ca_file    | file        |                                   | CA cert file to use for request   |
 | verify_ssl | true\|false | true                              | option to verify certificate/host |
 
 #### cluster health options
 
-Events from **/_cluster/health?level=indices**.
+Events from **[/_cluster/health?level=indices](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html)**.
 
-| setting              | type             | default | description                          |
-|----------------------|------------------|---------|--------------------------------------|
-| cluster_health       | true\|false      | false   | enable cluster health events collect |
-| cluster_health_level | indices\|cluster | indices |                                      |
+| setting              | type             | default | description                                    |
+|----------------------|------------------|---------|------------------------------------------------|
+| cluster_health       | true\|false      | true    | enable cluster health events collect           |
+| cluster_health_level | indices\|cluster | cluster | details level of the health information        |
+| cluster_health_local | true\|false      | false   | retrieves information from the local node only |
 
-#### cluster starts options
+
+#### cluster stats options
 
 Events from **/_cluster/stats**.
 

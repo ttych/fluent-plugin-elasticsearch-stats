@@ -29,5 +29,9 @@ Metrics/MethodLength:
   Exclude:
     - test/**/*.rb
 
+Metrics/ParameterLists:
+  Exclude:
+    - lib/fluent/plugin/elasticsearch_stats.rb
+
 Style/Documentation:
   Enabled: false
