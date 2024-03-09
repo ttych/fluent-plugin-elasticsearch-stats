@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     fluent-plugin-elasticsearch-stats (0.1.0)
+      faraday (~> 2.9)
       fluentd (>= 0.14.10, < 2)
 
 GEM
@@ -41,6 +42,10 @@ GEM
       dry-inflector (~> 1.0)
       dry-logic (~> 1.4)
       zeitwerk (~> 2.6)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     fluentd (1.16.3)
       bundler
       cool.io (>= 1.4.5, < 2.0.0)
@@ -57,6 +62,8 @@ GEM
     json (2.7.1)
     language_server-protocol (3.17.0.3)
     msgpack (1.7.2)
+    net-http (0.4.1)
+      uri
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -106,6 +113,7 @@ GEM
     tzinfo-data (1.2024.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     webrick (1.8.1)
     yajl-ruby (1.4.3)
     zeitwerk (2.6.13)

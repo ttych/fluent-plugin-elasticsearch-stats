@@ -1,0 +1,288 @@
+{
+  "_nodes": {
+    "total": 1,
+    "successful": 1,
+    "failed": 0
+  },
+  "cluster_name": "elasticsearch",
+  "cluster_uuid": "p7WGOZyBQtudPoKvcsBa6g",
+  "timestamp": 1709764614311,
+  "status": "green",
+  "indices": {
+    "count": 4,
+    "shards": {
+      "total": 4,
+      "primaries": 4,
+      "replication": 0.0,
+      "index": {
+        "shards": {
+          "min": 1,
+          "max": 1,
+          "avg": 1.0
+        },
+        "primaries": {
+          "min": 1,
+          "max": 1,
+          "avg": 1.0
+        },
+        "replication": {
+          "min": 0.0,
+          "max": 0.0,
+          "avg": 0.0
+        }
+      }
+    },
+    "docs": {
+      "count": 64,
+      "deleted": 39
+    },
+    "store": {
+      "size_in_bytes": 38926848,
+      "total_data_set_size_in_bytes": 38926848,
+      "reserved_in_bytes": 0
+    },
+    "fielddata": {
+      "memory_size_in_bytes": 0,
+      "evictions": 0
+    },
+    "query_cache": {
+      "memory_size_in_bytes": 0,
+      "total_count": 0,
+      "hit_count": 0,
+      "miss_count": 0,
+      "cache_size": 0,
+      "cache_count": 0,
+      "evictions": 0
+    },
+    "completion": {
+      "size_in_bytes": 0
+    },
+    "segments": {
+      "count": 8,
+      "memory_in_bytes": 23144,
+      "terms_memory_in_bytes": 17536,
+      "stored_fields_memory_in_bytes": 3952,
+      "term_vectors_memory_in_bytes": 0,
+      "norms_memory_in_bytes": 448,
+      "points_memory_in_bytes": 0,
+      "doc_values_memory_in_bytes": 1208,
+      "index_writer_memory_in_bytes": 0,
+      "version_map_memory_in_bytes": 0,
+      "fixed_bit_set_memory_in_bytes": 0,
+      "max_unsafe_auto_id_timestamp": -1,
+      "file_sizes": {
+      }
+    },
+    "mappings": {
+      "field_types": [
+        {
+          "name": "boolean",
+          "count": 1,
+          "index_count": 1,
+          "script_count": 0
+        },
+        {
+          "name": "constant_keyword",
+          "count": 6,
+          "index_count": 2,
+          "script_count": 0
+        },
+        {
+          "name": "date",
+          "count": 7,
+          "index_count": 3,
+          "script_count": 0
+        },
+        {
+          "name": "ip",
+          "count": 2,
+          "index_count": 2,
+          "script_count": 0
+        },
+        {
+          "name": "keyword",
+          "count": 31,
+          "index_count": 3,
+          "script_count": 0
+        },
+        {
+          "name": "long",
+          "count": 1,
+          "index_count": 1,
+          "script_count": 0
+        },
+        {
+          "name": "object",
+          "count": 25,
+          "index_count": 3,
+          "script_count": 0
+        },
+        {
+          "name": "text",
+          "count": 5,
+          "index_count": 3,
+          "script_count": 0
+        }
+      ],
+      "runtime_field_types": [
+
+      ]
+    },
+    "analysis": {
+      "char_filter_types": [
+
+      ],
+      "tokenizer_types": [
+
+      ],
+      "filter_types": [
+
+      ],
+      "analyzer_types": [
+
+      ],
+      "built_in_char_filters": [
+
+      ],
+      "built_in_tokenizers": [
+
+      ],
+      "built_in_filters": [
+
+      ],
+      "built_in_analyzers": [
+
+      ]
+    },
+    "versions": [
+      {
+        "version": "7.16.2",
+        "index_count": 4,
+        "primary_shard_count": 4,
+        "total_primary_bytes": 38926848
+      }
+    ]
+  },
+  "nodes": {
+    "count": {
+      "total": 1,
+      "coordinating_only": 0,
+      "data": 1,
+      "data_cold": 1,
+      "data_content": 1,
+      "data_frozen": 1,
+      "data_hot": 1,
+      "data_warm": 1,
+      "ingest": 1,
+      "master": 1,
+      "ml": 1,
+      "remote_cluster_client": 1,
+      "transform": 1,
+      "voting_only": 0
+    },
+    "versions": [
+      "7.16.2"
+    ],
+    "os": {
+      "available_processors": 16,
+      "allocated_processors": 16,
+      "names": [
+        {
+          "name": "Linux",
+          "count": 1
+        }
+      ],
+      "pretty_names": [
+        {
+          "pretty_name": "Ubuntu 23.10",
+          "count": 1
+        }
+      ],
+      "architectures": [
+        {
+          "arch": "amd64",
+          "count": 1
+        }
+      ],
+      "mem": {
+        "total_in_bytes": 32366751744,
+        "free_in_bytes": 1339219968,
+        "used_in_bytes": 31027531776,
+        "free_percent": 4,
+        "used_percent": 96
+      }
+    },
+    "process": {
+      "cpu": {
+        "percent": 0
+      },
+      "open_file_descriptors": {
+        "min": 341,
+        "max": 341,
+        "avg": 341
+      }
+    },
+    "jvm": {
+      "max_uptime_in_millis": 3443443,
+      "versions": [
+        {
+          "version": "17.0.1",
+          "vm_name": "OpenJDK 64-Bit Server VM",
+          "vm_version": "17.0.1+12",
+          "vm_vendor": "Eclipse Adoptium",
+          "bundled_jdk": true,
+          "using_bundled_jdk": true,
+          "count": 1
+        }
+      ],
+      "mem": {
+        "heap_used_in_bytes": 1252947160,
+        "heap_max_in_bytes": 16190013440
+      },
+      "threads": 72
+    },
+    "fs": {
+      "total_in_bytes": 927155486720,
+      "free_in_bytes": 552200962048,
+      "available_in_bytes": 552200962048
+    },
+    "plugins": [
+
+    ],
+    "network_types": {
+      "transport_types": {
+        "security4": 1
+      },
+      "http_types": {
+        "security4": 1
+      }
+    },
+    "discovery_types": {
+      "zen": 1
+    },
+    "packaging_types": [
+      {
+        "flavor": "default",
+        "type": "tar",
+        "count": 1
+      }
+    ],
+    "ingest": {
+      "number_of_pipelines": 1,
+      "processor_stats": {
+        "gsub": {
+          "count": 0,
+          "failed": 0,
+          "current": 0,
+          "time_in_millis": 0
+        },
+        "script": {
+          "count": 0,
+          "failed": 0,
+          "current": 0,
+          "time_in_millis": 0
+        }
+      }
+    }
+  }
+}

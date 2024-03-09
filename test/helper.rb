@@ -2,9 +2,9 @@
 
 require 'simplecov'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-                                                                 SimpleCov::Formatter::HTMLFormatter
-                                                               ])
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::HTMLFormatter]
+)
 
 SimpleCov.start do
   add_filter '/test/'
@@ -19,3 +19,7 @@ require 'timecop'
 
 Test::Unit::TestCase.include(Fluent::Test::Helpers)
 Test::Unit::TestCase.extend(Fluent::Test::Helpers)
+
+require_relative 'fixture'
+
+Test::Unit::TestCase.include(Test::Fixture)

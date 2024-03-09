@@ -9,7 +9,7 @@ Gemspec/DevelopmentDependencies:
   Enabled: false
 
 Layout/LineLength:
-  Max: 140
+  Max: 120
 
 # Metrics/AbcSize:
 #   Max: 40
@@ -30,8 +30,7 @@ Metrics/MethodLength:
     - test/**/*.rb
 
 Metrics/ParameterLists:
-  Exclude:
-    - lib/fluent/plugin/elasticsearch_stats.rb
+  Exclude: []
 
 Style/Documentation:
   Enabled: false
