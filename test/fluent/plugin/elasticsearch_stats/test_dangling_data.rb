@@ -31,7 +31,7 @@ class DanglingDataTest < Test::Unit::TestCase
     test 'it has dangling_count metric' do
       data = create_data(data: fixture_json('dangling'))
       expected_metric = { 'timestamp' => TEST_TIME_ISO,
-                          'name' => 'dangling/all/count',
+                          'name' => 'dangling_indices/count',
                           'value' => 1,
                           'family' => 'dangling' }
       metrics = data.extract_metrics

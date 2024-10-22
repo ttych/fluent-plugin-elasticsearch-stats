@@ -14,7 +14,7 @@ module Fluent
 
         def generate_dangling_indices_count
           metrics = []
-          metrics << metric.format(name: %w[dangling all count],
+          metrics << metric.format(name: %w[dangling_indices count],
                                    value: dangling_indices.size,
                                    family: family,
                                    metadata: metadata)
