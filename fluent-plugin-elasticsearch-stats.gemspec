@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://gitlab.com/ttych/fluent-plugin-elasticsearch-stats'
   spec.license       = 'Apache-2.0'
 
-  spec.required_ruby_version = '>= 2.4.0'
+  spec.required_ruby_version = '>= 2.7.0'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 
