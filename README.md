@@ -34,26 +34,28 @@ Example of config
 
 #### global options
 
-| setting                | type               | default                           | description                                                         |
-|------------------------|--------------------|-----------------------------------|---------------------------------------------------------------------|
-| tag                    |                    | elasticsearch_stats               | tag to emit events on                                               |
-| urls                   |                    | ["http://localhost:9200"]         | list of urls to poll                                                |
-| timeout                | second             | 10                                | timeout for each call                                               |
-| username               |                    |                                   | username for basic authentication                                   |
-| password               |                    |                                   | password for basic authentication                                   |
-| user_agent             |                    | fluent-plugin-elasticsearch-stats | user agent for http request                                         |
-| ca_file                | file               |                                   | CA cert file to use for request                                     |
-| verify_ssl             | true\|false        | true                              | option to verify certificate/host                                   |
-|                        |                    |                                   |                                                                     |
-| interval               | second             | 300                               | interval for probe execution                                        |
-|                        |                    |                                   |                                                                     |
-| metric_prefix          |                    |                                   | prefix for metric fields                                            |
-| metadata_prefix        |                    |                                   | prefix for metadata fields                                          |
-| timestamp_format       | iso\|epochmillis   | iso                               | event timestamp format                                              |
-| event_name_separator   |                    | /                                 | event name separator                                                |
-|                        |                    |                                   |                                                                     |
-| index_base_pattern     | regexp             |                                   | base index pattern to generate aggregated index metrics             |
-| index_base_replacement | regexp replacement | \1                                | base index pattern replacement to generate aggregated index metrics |
+| setting                       | type               | default                           | description                                                         |
+|-------------------------------|--------------------|-----------------------------------|---------------------------------------------------------------------|
+| tag                           |                    | elasticsearch_stats               | tag to emit events on                                               |
+| urls                          |                    | ["http://localhost:9200"]         | list of urls to poll                                                |
+| timeout                       | second             | 10                                | timeout for each call                                               |
+| username                      |                    |                                   | username for basic authentication                                   |
+| password                      |                    |                                   | password for basic authentication                                   |
+| user_agent                    |                    | fluent-plugin-elasticsearch-stats | user agent for http request                                         |
+| ca_file                       | file               |                                   | CA cert file to use for request                                     |
+| verify_ssl                    | bool               | true                              | option to verify certificate/host                                   |
+|                               |                    |                                   |                                                                     |
+| interval                      | second             | 300                               | interval for probe execution                                        |
+|                               |                    |                                   |                                                                     |
+| metric_prefix                 |                    |                                   | prefix for metric fields                                            |
+| metadata_prefix               |                    |                                   | prefix for metadata fields                                          |
+| timestamp_format              | iso\|epochmillis   | iso                               | event timestamp format                                              |
+| event_name_separator          |                    | /                                 | event name separator                                                |
+|                               |                    |                                   |                                                                     |
+| index_base_pattern            | regexp             |                                   | base index pattern to generate aggregated index metrics             |
+| index_base_replacement        | regexp replacement | \1                                | base index pattern replacement to generate aggregated index metrics |
+|                               |                    |                                   |                                                                     |
+| aggregated_index_metrics_only | bool               | false                             | for index matrics, only generate aggregated metrics                 |
 
 #### cluster health options
 

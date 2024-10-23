@@ -8,7 +8,7 @@ module Fluent
         DEFAULT_TIMESTAMP_FORMAT = :iso
 
         class << self
-          attr_accessor :metric_prefix, :index_base_pattern, :index_base_replacement
+          attr_accessor :metric_prefix, :index_base_pattern, :index_base_replacement, :aggregated_index_metrics_only
 
           def name_separator
             @name_separator ||= DEFAULT_NAME_SEPARATOR
@@ -21,14 +21,16 @@ module Fluent
           end
         end
 
-        attr_reader :metric_prefix, :timestamp_format, :index_base_pattern, :index_base_replacement, :name_separator
+        attr_reader :metric_prefix, :timestamp_format, :index_base_pattern, :index_base_replacement,
+                    :aggregated_index_metrics_only, :name_separator
 
-        def initialize(metric_prefix: nil, timestamp_format: nil, index_base_pattern: nil, index_base_replacement: nil,
+        def initialize(metric_prefix: nil, timestamp_format: nil, index_base_pattern: nil, index_base_replacement: nil, aggregated_index_metrics_only: nil,
                        name_separator: nil)
           @metric_prefix = metric_prefix || self.class.metric_prefix
           @timestamp_format = timestamp_format || self.class.timestamp_format
           @index_base_pattern = index_base_pattern || self.class.index_base_pattern
           @index_base_replacement = index_base_replacement || self.class.index_base_replacement
+          @aggregated_index_metrics_only = aggregated_index_metrics_only || self.class.aggregated_index_metrics_only
           @name_separator = name_separator || self.class.name_separator
         end
 

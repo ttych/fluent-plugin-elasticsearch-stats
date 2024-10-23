@@ -9759,5 +9759,40 @@ class IndicesStatsDataTest < Test::Unit::TestCase
         assert metrics.include?(expected_metric)
       end
     end
+
+    sub_test_case 'aggregated indices only' do
+      test 'it has all_indices metrics' do
+        metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1',
+                               aggregated_index_metrics_only: true)
+        data = create_data(data: fixture_json('indices_stats__indices'), metric: metric)
+
+        metrics = data.extract_metrics
+
+        expected = metrics.find { |metric| metric['name'].start_with?('all_indices') }
+        assert expected
+      end
+
+      test 'it has no indices metrics' do
+        metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1',
+                               aggregated_index_metrics_only: true)
+        data = create_data(data: fixture_json('indices_stats__indices'), metric: metric)
+
+        metrics = data.extract_metrics
+
+        expected = metrics.find { |metric| metric['name'].start_with?('index') && !metric['aggregated'] }
+        refute expected
+      end
+
+      test 'it has aggregated indices metrics' do
+        metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1',
+                               aggregated_index_metrics_only: true)
+        data = create_data(data: fixture_json('indices_stats__indices'), metric: metric)
+
+        metrics = data.extract_metrics
+
+        expected = metrics.find { |metric| metric['name'].start_with?('index') && metric['aggregated'] }
+        assert expected
+      end
+    end
   end
 end

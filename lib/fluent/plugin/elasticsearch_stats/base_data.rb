@@ -40,6 +40,7 @@ module Fluent
           base_metrics = extract_indices_base_metrics
           aggregated_metrics = extract_indices_aggregated_metrics(base_metrics)
 
+          return aggregated_metrics if metric.aggregated_index_metrics_only
           base_metrics + aggregated_metrics
         end
 

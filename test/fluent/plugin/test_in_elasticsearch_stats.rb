@@ -30,6 +30,8 @@ class ElasticsearchStatsInputTest < Test::Unit::TestCase
       # assert_equal nil, input.ssl_client_cert_key
       # assert_equal true, input.ssl_verify_hostname
 
+      assert_equal false, input.aggregated_index_metrics_only
+
       assert_equal nil, input.username
       assert_equal nil, input.password
       assert_equal nil, input.ca_file
