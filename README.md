@@ -69,7 +69,7 @@ Events from **[/_cluster/health?level=indices](https://www.elastic.co/guide/en/e
 
 #### cluster stats options
 
-Events from **/_cluster/stats**.
+Events from **[/_cluster/stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-stats.html)**.
 
 | setting                        | type        | default | description                                |
 |--------------------------------|-------------|---------|--------------------------------------------|
@@ -77,7 +77,7 @@ Events from **/_cluster/stats**.
 
 #### nodes stats options
 
-Events from **/_nodes/stats**.
+Events from **[/_nodes/stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-nodes-stats.html)**.
 
 | setting             | type                                                                 | default | description                       |
 |---------------------|----------------------------------------------------------------------|---------|-----------------------------------|
@@ -87,17 +87,18 @@ Events from **/_nodes/stats**.
 
 #### indices stats options
 
-Events from **/_all/_stats**.
+Events from **[/_all/_stats](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html)**.
 
-| setting                         | type                     | default  | description                         |
-|---------------------------------|--------------------------|----------|-------------------------------------|
-| indices_stats                   | true\|false              | true     | enable indices stats events collect |
-| indices_stats_level             | cluster\|indices\|shards | indices  | indices_stats details level         |
-| indices                         |                          | ["_all"] | indices to collect stats on         |
+| setting               | type                      | default  | description                         |
+|-----------------------|---------------------------|----------|-------------------------------------|
+| indices_stats         | true\|false               | true     | enable indices stats events collect |
+| indices_stats_level   | cluster\|indices\|shards  | indices  | indices_stats details level         |
+| indices               |                           | ["_all"] | indices to collect stats on         |
+| indices_stats_metrics | completion,docs,store,... | []       |                                     |
 
 #### dangling options
 
-Events from **/_dangling**.
+Events from **[/_dangling](https://www.elastic.co/guide/en/elasticsearch/reference/current/dangling-indices-list.html)**.
 
 | setting  | type        | default | description                    |
 |----------|-------------|---------|--------------------------------|
