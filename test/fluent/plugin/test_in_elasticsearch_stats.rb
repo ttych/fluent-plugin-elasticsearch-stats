@@ -31,6 +31,7 @@ class ElasticsearchStatsInputTest < Test::Unit::TestCase
       # assert_equal true, input.ssl_verify_hostname
 
       assert_equal false, input.aggregated_index_metrics_only
+      assert_equal ['sum'], input.aggregated_index_metrics
 
       assert_equal nil, input.username
       assert_equal nil, input.password
@@ -57,6 +58,28 @@ class ElasticsearchStatsInputTest < Test::Unit::TestCase
         #{BASE_CONF}
         urls ""
       )
+      assert_raise(Fluent::ConfigError) do
+        create_driver(conf)
+      end
+    end
+
+    test 'aggregated_index_metrics can have count, min, max, avg, sum' do
+      conf = %(
+        #{BASE_CONF}
+        aggregated_index_metrics avg,count,min,max,sum
+      )
+      driver = create_driver(conf)
+      input = driver.instance
+
+      assert_equal ['avg', 'count', 'min', 'max', 'sum'], input.aggregated_index_metrics
+    end
+
+    test 'aggregated_index_metrics doest not allow unexpected values' do
+      conf = %(
+        #{BASE_CONF}
+        aggregated_index_metrics min,max,test,unexpeted,value,sum
+      )
+
       assert_raise(Fluent::ConfigError) do
         create_driver(conf)
       end

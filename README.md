@@ -56,6 +56,7 @@ Example of config
 | index_base_replacement        | regexp replacement | \1                                | base index pattern replacement to generate aggregated index metrics |
 |                               |                    |                                   |                                                                     |
 | aggregated_index_metrics_only | bool               | false                             | for index matrics, only generate aggregated metrics                 |
+| aggregated_index_metrics      | array              | [sum]                             | select in [avg, count, min, max, sum]                               |
 
 #### cluster health options
 

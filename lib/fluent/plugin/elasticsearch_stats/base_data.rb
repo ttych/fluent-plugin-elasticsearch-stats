@@ -41,6 +41,7 @@ module Fluent
           aggregated_metrics = extract_indices_aggregated_metrics(base_metrics)
 
           return aggregated_metrics if metric.aggregated_index_metrics_only
+
           base_metrics + aggregated_metrics
         end
 
@@ -77,35 +78,57 @@ module Fluent
                                      .set(label: 'index', value: index_base)
                                      .set(label: 'aggregated', value: true)
 
+            index_base_count = 0
+
             index_base_metrics.each do |metric_name, metric_name_metrics|
               metric_values = metric_name_metrics.map { |a_metric| a_metric[metric.value_label] }
               count = metric_values.size
-              min = metric_values.min
-              max = metric_values.max
-              sum = metric_values.sum
-              avg = sum / count.to_f
+              index_base_count = count if count > index_base_count
 
-              metrics <<  metric.format(name: [metric_name, 'count'],
-                                        value: count,
-                                        family: family,
-                                        metadata: local_metadata)
-              metrics <<  metric.format(name: [metric_name, 'min'],
-                                        value: min,
-                                        family: family,
-                                        metadata: local_metadata)
-              metrics <<  metric.format(name: [metric_name, 'max'],
-                                        value: max,
-                                        family: family,
-                                        metadata: local_metadata)
-              metrics <<  metric.format(name: [metric_name, 'sum'],
-                                        value: sum,
-                                        family: family,
-                                        metadata: local_metadata)
-              metrics <<  metric.format(name: [metric_name, 'avg'],
-                                        value: avg,
-                                        family: family,
-                                        metadata: local_metadata)
+              if metric.aggregated_index_metrics.include?('count')
+                metrics << metric.format(name: [metric_name, 'count'],
+                                         value: count,
+                                         family: family,
+                                         metadata: local_metadata)
+              end
+
+              if metric.aggregated_index_metrics.include?('min')
+                min = metric_values.min
+                metrics << metric.format(name: [metric_name, 'min'],
+                                         value: min,
+                                         family: family,
+                                         metadata: local_metadata)
+              end
+
+              if metric.aggregated_index_metrics.include?('max')
+                max = metric_values.max
+                metrics << metric.format(name: [metric_name, 'max'],
+                                         value: max,
+                                         family: family,
+                                         metadata: local_metadata)
+              end
+
+              if metric.aggregated_index_metrics.include?('sum')
+                sum = metric_values.sum
+                metrics << metric.format(name: [metric_name, 'sum'],
+                                         value: sum,
+                                         family: family,
+                                         metadata: local_metadata)
+              end
+
+              if metric.aggregated_index_metrics.include?('avg')
+                avg = sum / count.to_f
+                metrics << metric.format(name: [metric_name, 'avg'],
+                                         value: avg,
+                                         family: family,
+                                         metadata: local_metadata)
+              end
             end
+
+            metrics << metric.format(name: %w[index count],
+                                     value: index_base_count,
+                                     family: family,
+                                     metadata: local_metadata)
           end
 
           metrics.compact

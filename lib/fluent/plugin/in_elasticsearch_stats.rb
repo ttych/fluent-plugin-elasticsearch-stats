@@ -54,10 +54,12 @@ module Fluent
       DEFAULT_EVENT_NAME_SEPARATOR = '/'
       DEFAULT_SKIP_SYSTEM_INDICES = true
       DEFAULT_AGGREGATED_INDEX_METRICS_ONLY = false
+      DEFAULT_AGGREGATED_INDEX_METRICS = ['sum']
 
       ALLOWED_CLUSTER_HEALTH_LEVELS = Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_CLUSTER_HEALTH_LEVELS
       ALLOWED_NODES_STATS_LEVELS =  Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_NODES_STATS_LEVELS
       ALLOWED_INDICES_STATS_LEVELS = Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_INDICES_LEVELS
+      ALLOWED_AGGREGATED_INDEX_METRICS = Fluent::Plugin::ElasticsearchStats::Metric::ALLOWED_AGGREGATED_INDEX_METRICS
 
       desc 'tag to emit events on'
       config_param :tag, :string, default: DEFAULT_TAG
@@ -123,8 +125,10 @@ module Fluent
       desc 'base index pattern replacement to generate aggregated index metrics'
       config_param :index_base_replacement, :string, default: DEFAULT_INDEX_BASE_REPLACEMENT
 
-      desc 'base index pattern to generate aggregated index metrics'
+      desc 'generate only index aggregated metrics and discard index base metrics'
       config_param :aggregated_index_metrics_only, :bool, default: DEFAULT_AGGREGATED_INDEX_METRICS_ONLY
+      desc 'list of aggregated index metrics to generate'
+      config_param :aggregated_index_metrics, :array, value_type: :string, default: DEFAULT_AGGREGATED_INDEX_METRICS
 
       # desc 'skip system indices'
       # config_param :skip_system_indices, :bool, default: DEFAULT_SKIP_SYSTEM_INDICES
@@ -137,12 +141,16 @@ module Fluent
 
         @mutex_emit = Mutex.new
 
+        wrong_fields = aggregated_index_metrics.select { |item| ! ALLOWED_AGGREGATED_INDEX_METRICS.include?(item) }
+        raise Fluent::ConfigError, "aggregated_index_metrics contains unexpected values: #{wrong_fields}" if wrong_fields.size > 0
+
         ElasticsearchStats::Metadata.metadata_prefix = metadata_prefix
         ElasticsearchStats::Metric.metric_prefix = metric_prefix
         ElasticsearchStats::Metric.timestamp_format = timestamp_format
         ElasticsearchStats::Metric.index_base_pattern = index_base_pattern
         ElasticsearchStats::Metric.index_base_replacement = index_base_replacement
         ElasticsearchStats::Metric.aggregated_index_metrics_only = aggregated_index_metrics_only
+        ElasticsearchStats::Metric.aggregated_index_metrics = aggregated_index_metrics
         ElasticsearchStats::Metric.name_separator = event_name_separator
 
         configure_elasticsearchs

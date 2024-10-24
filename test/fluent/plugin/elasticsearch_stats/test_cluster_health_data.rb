@@ -33,6 +33,11 @@ class ClusterHealthDataTest < Test::Unit::TestCase
     )
   end
 
+  def create_full_agr_metric(**options)
+    options[:aggregated_index_metrics] = ['avg', 'count', 'min', 'max', 'sum']
+    create_metric(**options)
+  end
+
   sub_test_case 'cluster health metrics' do
     sub_test_case 'cluster level' do
       test 'it has status metric' do
@@ -310,7 +315,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
         end
 
         test 'it has aggregated active_shards_count metric' do
-          metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
+          metric = create_full_agr_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
           data = create_data(data: fixture_json('cluster_health__with_indices'), metric: metric)
           expected_metric = {
                               'index' => 'logs',
@@ -326,7 +331,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
         end
 
         test 'it has aggregated active_shards_min metric' do
-          metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
+          metric = create_full_agr_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
           data = create_data(data: fixture_json('cluster_health__with_indices'), metric: metric)
           expected_metric = {
                               'index' => 'logs',
@@ -342,7 +347,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
         end
 
         test 'it has aggregated active_shards_max metric' do
-          metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
+          metric = create_full_agr_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
           data = create_data(data: fixture_json('cluster_health__with_indices'), metric: metric)
           expected_metric = {
                               'index' => 'logs',
@@ -374,7 +379,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
         end
 
         test 'it has aggregated active_shards_avg metric' do
-          metric = create_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
+          metric = create_full_agr_metric(index_base_pattern: /(.+)-[0-9]{6}/, index_base_replacement: '\1')
           data = create_data(data: fixture_json('cluster_health__with_indices'), metric: metric)
           expected_metric = {
                               'index' => 'logs',
