@@ -45,7 +45,8 @@ module Fluent
       DEFAULT_NODES_STATS_METRICS = nil
       DEFAULT_INDICES_STATS = true
       DEFAULT_INDICES_STATS_LEVEL = :indices
-      DEFAULT_INDICES = nil
+      DEFAULT_INDICES = [:_all]
+      DEFAULT_INDICES_STATS_METRICS = nil
       DEFAULT_SHARDS_STATS = true
       DEFAULT_DANGLING = false
       DEFAULT_INDEX_BASE_PATTERN = nil # '/(.*)/'
@@ -111,6 +112,8 @@ module Fluent
       config_param :indices, :array, value_type: :string, default: DEFAULT_INDICES
       desc 'indices_stats details level'
       config_param :indices_stats_level, :enum, list: ALLOWED_INDICES_STATS_LEVELS, default: DEFAULT_INDICES_STATS_LEVEL
+      desc 'lmits information to specific metrics for indices stats'
+      config_param :indices_stats_metrics, :array, value_type: :string, default: DEFAULT_INDICES_STATS_METRICS
 
       desc 'collect dangling events'
       config_param :dangling, :bool, default: DEFAULT_DANGLING

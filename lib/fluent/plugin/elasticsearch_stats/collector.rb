@@ -63,7 +63,8 @@ module Fluent
           without_error(rescue_return: []) do
             data = client.indices_stats(
               indices: stats_config.indices,
-              level: stats_config.indices_stats_level
+              level: stats_config.indices_stats_level,
+              metrics: stats_config.indices_stats_metrics
             )
             IndicesStatsData.new(data).extract_metrics
           end
