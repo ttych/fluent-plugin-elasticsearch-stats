@@ -322,7 +322,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index_base' => 'logs',
                               'aggregated' => true,
                               'timestamp' => TEST_TIME_ISO,
-                              'name' => 'index/status/count',
+                              'name' => 'indices/status/count',
                               'value' => 2,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }
@@ -338,7 +338,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index_base' => 'logs',
                               'aggregated' => true,
                               'timestamp' => TEST_TIME_ISO,
-                              'name' => 'index/active_shards/min',
+                              'name' => 'indices/active_shards/min',
                               'value' => 1,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }
@@ -354,7 +354,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index_base' => 'logs',
                               'aggregated' => true,
                               'timestamp' => TEST_TIME_ISO,
-                              'name' => 'index/active_shards/max',
+                              'name' => 'indices/active_shards/max',
                               'value' => 1,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }
@@ -370,7 +370,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index_base' => 'logs',
                               'aggregated' => true,
                               'timestamp' => TEST_TIME_ISO,
-                              'name' => 'index/active_shards/sum',
+                              'name' => 'indices/active_shards/sum',
                               'value' => 2,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }
@@ -386,7 +386,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index_base' => 'logs',
                               'aggregated' => true,
                               'timestamp' => TEST_TIME_ISO,
-                              'name' => 'index/active_shards/avg',
+                              'name' => 'indices/active_shards/avg',
                               'value' => 1.0,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }

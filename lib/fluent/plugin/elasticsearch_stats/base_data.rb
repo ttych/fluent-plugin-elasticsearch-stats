@@ -85,8 +85,10 @@ module Fluent
               count = metric_values.size
               index_base_count = count if count > index_base_count
 
+              aggregated_metric_name = pluralize_metric_name(metric_name)
+
               if metric.aggregated_index_metrics.include?('count')
-                metrics << metric.format(name: [metric_name, 'count'],
+                metrics << metric.format(name: [aggregated_metric_name, 'count'],
                                          value: count,
                                          family: family,
                                          metadata: local_metadata)
@@ -94,7 +96,7 @@ module Fluent
 
               if metric.aggregated_index_metrics.include?('min')
                 min = metric_values.min
-                metrics << metric.format(name: [metric_name, 'min'],
+                metrics << metric.format(name: [aggregated_metric_name, 'min'],
                                          value: min,
                                          family: family,
                                          metadata: local_metadata)
@@ -102,7 +104,7 @@ module Fluent
 
               if metric.aggregated_index_metrics.include?('max')
                 max = metric_values.max
-                metrics << metric.format(name: [metric_name, 'max'],
+                metrics << metric.format(name: [aggregated_metric_name, 'max'],
                                          value: max,
                                          family: family,
                                          metadata: local_metadata)
@@ -110,7 +112,7 @@ module Fluent
 
               if metric.aggregated_index_metrics.include?('sum')
                 sum = metric_values.sum
-                metrics << metric.format(name: [metric_name, 'sum'],
+                metrics << metric.format(name: [aggregated_metric_name, 'sum'],
                                          value: sum,
                                          family: family,
                                          metadata: local_metadata)
@@ -118,14 +120,14 @@ module Fluent
 
               if metric.aggregated_index_metrics.include?('avg')
                 avg = sum / count.to_f
-                metrics << metric.format(name: [metric_name, 'avg'],
+                metrics << metric.format(name: [aggregated_metric_name, 'avg'],
                                          value: avg,
                                          family: family,
                                          metadata: local_metadata)
               end
             end
 
-            metrics << metric.format(name: %w[index count],
+            metrics << metric.format(name: %w[indices count],
                                      value: index_base_count,
                                      family: family,
                                      metadata: local_metadata)
@@ -140,6 +142,11 @@ module Fluent
 
         def indices
           data['indices']
+        end
+
+        def pluralize_metric_name(metric_name)
+          metric_name.sub(/^index#{metric.name_separator}/,
+                          "indices#{metric.name_separator}")
         end
       end
     end
