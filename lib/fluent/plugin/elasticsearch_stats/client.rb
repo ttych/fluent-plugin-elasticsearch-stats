@@ -16,7 +16,7 @@ module Fluent
         CLUSTER_HEALTH_LEVEL = 'cluster'
         NODES_STATS_LEVEL = 'cluster'
         INDICES_STATS_LEVEL = 'indices'
-        INDICES = [:_all]
+        INDICES = [:_all].freeze
 
         ALLOWED_CLUSTER_HEALTH_LEVELS = %i[cluster indices shards].freeze
         ALLOWED_NODES_STATS_LEVELS = %i[nodes indices shards].freeze
@@ -71,6 +71,11 @@ module Fluent
           @log = log
         end
 
+        def cluster_info
+          endpoint = '/'
+          get(endpoint)
+        end
+
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html
         def cluster_health(level: CLUSTER_HEALTH_LEVEL, local: LOCAL)
           endpoint = '/_cluster/health'
@@ -96,7 +101,7 @@ module Fluent
         # https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-stats.html
         def indices_stats(indices: INDICES, level: INDICES_STATS_LEVEL, metrics: nil)
           indices ||= INDICES
-          endpoint = "/_stats"
+          endpoint = '/_stats'
           endpoint = "/#{indices.join(',')}#{endpoint}" if !indices.nil? && !indices.empty?
           endpoint += "/#{metrics.join(',')}" if metrics&.any?
           params = { level: level }

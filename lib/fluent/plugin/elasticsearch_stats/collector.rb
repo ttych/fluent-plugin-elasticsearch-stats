@@ -4,6 +4,8 @@ module Fluent
   module Plugin
     module ElasticsearchStats
       class Collector
+        CLUSTER_INFO_TTL = 12 * 3600
+
         attr_reader :client, :stats_config, :log
 
         def initialize(client:,
@@ -32,7 +34,7 @@ module Fluent
               level: stats_config.cluster_health_level,
               local: stats_config.cluster_health_local
             )
-            ClusterHealthData.new(data).extract_metrics
+            ClusterHealthData.new(data, metadata: metadata).extract_metrics
           end
         end
 
@@ -41,7 +43,7 @@ module Fluent
 
           without_error(rescue_return: []) do
             data = client.cluster_stats
-            ClusterStatsData.new(data).extract_metrics
+            ClusterStatsData.new(data, metadata: metadata).extract_metrics
           end
         end
 
@@ -53,7 +55,7 @@ module Fluent
               level: stats_config.nodes_stats_level,
               metrics: stats_config.nodes_stats_metrics
             )
-            NodesStatsData.new(data).extract_metrics
+            NodesStatsData.new(data, metadata: metadata).extract_metrics
           end
         end
 
@@ -66,7 +68,7 @@ module Fluent
               level: stats_config.indices_stats_level,
               metrics: stats_config.indices_stats_metrics
             )
-            IndicesStatsData.new(data).extract_metrics
+            IndicesStatsData.new(data, metadata: metadata).extract_metrics
           end
         end
 
@@ -75,15 +77,28 @@ module Fluent
 
           without_error(rescue_return: []) do
             data = client.dangling
-            DanglingData.new(data).extract_metrics
+            DanglingData.new(data, metadata: metadata).extract_metrics
           end
         end
 
-        # FIXME: inject metadata !
-        #        cluster metadata / info ?
         def metadata
           Metadata.new
-                  .set(label: 'cluster_url', value: client.url)
+                  .set(label: 'cluster_name', value: cluster_info['cluster_name'])
+          # .set(label: 'cluster_url', value: client.url)
+        end
+
+        def cluster_info(ttl: CLUSTER_INFO_TTL)
+          cluster_info_prev = nil
+          if @cluster_info_timestamp && (Time.now - @cluster_info_timestamp > ttl)
+            cluster_info_prev = @cluster_info
+            @cluster_info = nil
+          end
+
+          without_error do
+            @cluster_info ||= client.cluster_info
+            @cluster_info_timestamp = Time.now
+          end
+          @cluster_info ||= cluster_info_prev
         end
 
         def without_error(error: StandardError, rescue_return: nil)
