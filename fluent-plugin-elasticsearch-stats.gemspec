@@ -10,11 +10,14 @@ Gem::Specification.new do |spec|
   spec.email   = ['thomas.tych@gmail.com']
 
   spec.summary       = 'fluentd plugin to generate elasticsearch cluster stats events.'
-  spec.homepage      = 'https://gitlab.com/ttych/fluent-plugin-elasticsearch-stats'
+  spec.homepage      = "https://gitlab.com/ttych/#{spec.name}"
   spec.license       = 'Apache-2.0'
 
   spec.required_ruby_version = '>= 2.7.0'
 
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['documentation_uri'] = "http://www.rubydoc.info/gems/#{spec.name}/#{spec.version}"
   spec.metadata['rubygems_mfa_required'] = 'true'
 
   _, files = `git ls-files -z`.split("\x0").partition do |f|
