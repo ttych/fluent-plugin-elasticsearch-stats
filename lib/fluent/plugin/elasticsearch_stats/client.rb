@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'faraday'
+require 'faraday/retry'
 
 module Fluent
   module Plugin
@@ -8,6 +9,9 @@ module Fluent
       class Client
         class Error < StandardError
         end
+
+        RETRY_COUNT = 2
+        RETRY_DELAY = 5
 
         TIMEOUT = 10
         USER_AGENT = 'elasticsearch_stats'
@@ -146,6 +150,8 @@ module Fluent
             config.response :json
             config.response :raise_error
             config.response :logger, log, headers: false, bodies: false, log_level: :debug if log
+
+            config.request :retry, max: RETRY_COUNT, interval: RETRY_DELAY
             config.adapter :net_http
           end
         end
