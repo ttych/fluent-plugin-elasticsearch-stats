@@ -105,6 +105,18 @@ Events from **[/_dangling](https://www.elastic.co/guide/en/elasticsearch/referen
 |----------|-------------|---------|--------------------------------|
 | dangling | true\|false | false   | enable dangling events collect |
 
+#### status mapping
+
+Here is the chosen status mapping to metric :
+
+| status | value |
+|--------|-------|
+| green  | 0     |
+| yellow | 1     |
+| red    | 2     |
+
+So through aggregation, it is still possible to identify status in time (green or not-green).
+
 
 ## Installation
 

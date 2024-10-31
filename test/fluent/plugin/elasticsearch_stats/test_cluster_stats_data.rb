@@ -32,7 +32,7 @@ class ClusterStatsDataTest < Test::Unit::TestCase
       data = create_data(data: fixture_json('cluster_stats'))
       expected_metric = { 'timestamp' => TEST_TIME_ISO,
                           'name' => 'cluster/status',
-                          'value' => 1,
+                          'value' => 0,
                           'family' => 'cluster_stats',
                           'cluster_name' => 'elasticsearch' }
       metrics = data.extract_metrics
