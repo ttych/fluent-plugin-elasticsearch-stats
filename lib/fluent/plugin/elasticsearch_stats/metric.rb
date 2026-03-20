@@ -43,10 +43,10 @@ module Fluent
 
         def convert_status(status)
           case status.downcase
-          when 'green' then 0
-          when 'yellow' then 1
-          when 'red' then 2
-          else 3
+          when 'green' then 1
+          when 'yellow' then 2
+          when 'red' then 3
+          else 0
           end
         end
 

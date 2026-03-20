@@ -45,7 +45,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
         expected_metric = {
                             'timestamp' => TEST_TIME_ISO,
                             'name' => 'cluster/status',
-                            'value' => 0,
+                            'value' => 1,
                             'family' => 'cluster_health',
                             'cluster_name' => 'elasticsearch' }
         metrics = data.send(:extract_cluster_metrics)
@@ -206,7 +206,7 @@ class ClusterHealthDataTest < Test::Unit::TestCase
                               'index' => 'logs-000001',
                               'timestamp' => TEST_TIME_ISO,
                               'name' => 'index/status',
-                              'value' => 0,
+                              'value' => 1,
                               'family' => 'cluster_health',
                               'cluster_name' => 'elasticsearch' }
           metrics = data.send(:extract_indices_metrics)

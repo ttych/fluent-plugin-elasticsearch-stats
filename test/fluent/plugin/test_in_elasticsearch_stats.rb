@@ -4,6 +4,9 @@ require 'helper'
 require 'fluent/plugin/in_elasticsearch_stats'
 
 class ElasticsearchStatsInputTest < Test::Unit::TestCase
+  BASE_CONF = %()
+  TEST_TIME = Time.parse('2025-01-01T00:00:00.000Z')
+
   setup do
     Fluent::Test.setup
   end
@@ -88,10 +91,7 @@ class ElasticsearchStatsInputTest < Test::Unit::TestCase
 
   private
 
-  BASE_CONF = %()
   def create_driver(conf = BASE_CONF)
     Fluent::Test::Driver::Input.new(Fluent::Plugin::ElasticsearchStatsInput).configure(conf)
   end
-
-  MOCKED_TIME = Time.parse('2024-01-01T00:00:00.000Z')
 end
