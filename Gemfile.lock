@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fluent-plugin-elasticsearch-stats (0.6.0)
+    fluent-plugin-elasticsearch-stats (0.7.0)
       faraday (~> 2.9)
       faraday-retry (~> 2.2, >= 2.2.1)
       fluentd (>= 0.14.10, < 2)
