@@ -56,6 +56,8 @@ module Fluent
       DEFAULT_AGGREGATED_INDEX_METRICS_ONLY = false
       DEFAULT_AGGREGATED_INDEX_METRICS = ['sum']
 
+      DEFAULT_METADATA_CLUSTER_URL = true
+
       ALLOWED_CLUSTER_HEALTH_LEVELS = Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_CLUSTER_HEALTH_LEVELS
       ALLOWED_NODES_STATS_LEVELS =  Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_NODES_STATS_LEVELS
       ALLOWED_INDICES_STATS_LEVELS = Fluent::Plugin::ElasticsearchStats::Client::ALLOWED_INDICES_LEVELS
@@ -132,6 +134,9 @@ module Fluent
 
       # desc 'skip system indices'
       # config_param :skip_system_indices, :bool, default: DEFAULT_SKIP_SYSTEM_INDICES
+
+      desc 'add cluster url as metadata'
+      config_param :metadata_cluster_url, :bool, default: DEFAULT_METADATA_CLUSTER_URL
 
       def configure(conf)
         super

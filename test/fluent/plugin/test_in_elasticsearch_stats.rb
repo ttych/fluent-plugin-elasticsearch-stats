@@ -44,6 +44,8 @@ class ElasticsearchStatsInputTest < Test::Unit::TestCase
       assert_equal Fluent::Plugin::ElasticsearchStatsInput::DEFAULT_CLUSTER_HEALTH, input.cluster_health
       assert_equal Fluent::Plugin::ElasticsearchStatsInput::DEFAULT_CLUSTER_HEALTH_LEVEL, input.cluster_health_level
       assert_equal Fluent::Plugin::ElasticsearchStatsInput::DEFAULT_CLUSTER_HEALTH_LOCAL, input.cluster_health_local
+
+      assert_equal Fluent::Plugin::ElasticsearchStatsInput::DEFAULT_METADATA_CLUSTER_URL, input.metadata_cluster_url
     end
 
     test 'tag should not be empty' do
