@@ -84,7 +84,7 @@ module Fluent
         def metadata
           Metadata.new.tap do |metadata|
             metadata.set(label: 'cluster_name', value: cluster_info['cluster_name'])
-            metadata.set(label: 'cluster_url ', value: client.url) if stats_config.metadata_cluster_url
+            metadata.set(label: 'cluster_url', value: client.url) if stats_config.metadata_cluster_url
           end
         end
 
