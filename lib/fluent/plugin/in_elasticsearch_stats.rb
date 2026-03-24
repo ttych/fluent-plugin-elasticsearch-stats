@@ -144,8 +144,6 @@ module Fluent
         raise Fluent::ConfigError, 'tag should not be empty' if tag.empty?
         raise Fluent::ConfigError, 'urls should not be empty' if urls.empty?
 
-        @mutex_emit = Mutex.new
-
         wrong_fields = aggregated_index_metrics.select { |item| ! ALLOWED_AGGREGATED_INDEX_METRICS.include?(item) }
         raise Fluent::ConfigError, "aggregated_index_metrics contains unexpected values: #{wrong_fields}" if wrong_fields.size > 0
 
@@ -190,21 +188,16 @@ module Fluent
         @elasticsearchs.each do |elasticsearch|
           threads << Thread.new do
             metrics = elasticsearch.collect_stats_metrics
-            events = MultiEventStream.new(
-              [Fluent::EventTime.now] * metrics.size,
-              metrics
-            )
-            emit_events(events)
+            emit_metrics(metrics)
           end
         end
         threads.each(&:join)
       end
 
-      def emit_events(events)
-        return if !events || events.empty?
-
-        @mutex_emit.synchronize do
-          router.emit_stream(tag, events)
+      def emit_metrics(metrics)
+        emit_time = Fluent::EventTime.now
+        metrics.each do |metric|
+          router.emit(tag, emit_time, metric)
         end
       end
     end
